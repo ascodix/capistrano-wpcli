@@ -22,7 +22,34 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add to Capfile :
+
+```ruby
+require 'capistrano/wpcli'
+```
+
+### Available commands
+
+Here's a list of all available commands for wp-deploy. They must all be prefixed by `bundle exec cap <environment>`.
+
+```
+$ deploy                   # Deploy the project to a given environment
+$ set :wpcli_local_url     # Setup your url locally
+$ set :wpcli_remote_url    # Setup your url remote
+$ set :wpcli_remote_url    # 
+$ set :local_backup_dir    # 
+$ wpcli:setup:both         # 
+$ wpcli:set_permissions    # Set 666 permission for `.htaccess` and 777 for `uploads` on remote environment
+$ wpcli:db:push            # Override the remote environment's database with your local copy. Will also do a 'search and replace' for the site URLs.
+$ wpcli:db:pull            # Override the local database with your remote environment's copy. Will also do a 'search and replace' for the site URLs.
+$ wpcli:db:backup          # Take an sqldump of the remote environment's database and store it in a folder of your local repository called db_backups (its ignored in Git)
+```
+
+## Example
+
+```
+cap production wpcli:db:push
+```
 
 ## Development
 
