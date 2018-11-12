@@ -3,35 +3,39 @@ namespace :wpcli do
   namespace :db do
 
     desc "Pull the remote database"
-    task :pull => :backup do
+    task :pull do
       on roles(:web) do
-        localFilename = "import-database.sql"
-        remoteFilename = "import-database.sql"
-        execute "cd '#{release_path}' && wp search-replace #{fetch(:wpcli_remote_url)} #{fetch(:wpcli_local_url)} --export=#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}"
-        # TODO: zipper
-        #execute "cd '#{fetch(:wpcli_remote_tmp_dir)}' && gzip #{remoteFilename}"
-        #download! "#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}.gz", "#{localFilename}.gz"
 
-        # TODO: sans zipper
-        download! "#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}", "#{localFilename}"
+        within release_path do
+          with path: "#{fetch(:path)}:$PATH" do
+            execute :wp, "--path=#{fetch(:wp_path)} db export #{fetch(:tmp_dir)}/database.sql"
+            execute :gzip, "-f #{fetch(:tmp_dir)}/database.sql"
+          end
+        end
+
+        download! "#{fetch(:tmp_dir)}/database.sql.gz", "database.sql.gz"
 
         run_locally do
-          # TODO: zipper
-          #execute "wp db import #{localFilename}.gz"
-          #execute :rm, "#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}.gz"
+          timestamp = "#{Time.now.year}-#{Time.now.month}-#{Time.now.day}-#{Time.now.hour}-#{Time.now.min}-#{Time.now.sec}"
 
-          # TODO: sans zipper
-          execute "wp db import #{localFilename}"
-          execute :rm, "#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}"
+          system "wp --path=#{fetch(:wp_path)} db export #{fetch(:application)}.#{timestamp}.sql" # backup
+
+          system "7z e database.sql.gz"
+          system "wp --path=#{fetch(:wp_path)} db import database.sql"
+          system "wp --path=#{fetch(:wp_path)} search-replace #{fetch(:wpcli_remote_url)} #{fetch(:wpcli_local_url)}"
+
+          system "del database.sql.gz"
+          system "del database.sql"
         end
+
       end
     end
 
     desc "Push the local database"
     task :push => :backup do
       on roles(:web) do
-          localFilename = "export-database.sql"
-          remoteFilename = "export-database.sql"
+          localFilename = "local-export-database.sql"
+          remoteFilename = "remote-export-database.sql"
           system "wp search-replace #{fetch(:wpcli_local_url)} #{fetch(:wpcli_remote_url)} --export=#{localFilename}"
           upload! localFilename, "#{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}"
           execute "cd '#{release_path}' && wp db import #{fetch(:wpcli_remote_tmp_dir)}/#{remoteFilename}"

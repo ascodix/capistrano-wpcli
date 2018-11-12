@@ -6,6 +6,8 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
+Sur windows installer 7zip et positionner la variable d'environement C:\Compression\7-Zip
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -68,3 +70,11 @@ The gem is available as open source under the terms of the [MIT License](http://
 ## Code of Conduct
 
 Everyone interacting in the Capistrano::Wpcli project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/capistrano-wpcli/blob/master/CODE_OF_CONDUCT.md).
+
+## Livraison
+
+```
+gem build capistrano-wpcli.gemspec
+
+gem push capistrano-wpcli-X.X.XX.gem
+```
