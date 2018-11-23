@@ -17,19 +17,11 @@ namespace :load do
 
     # Le répertoire des fichiers de sauvegarde
     # The backup files directory
-    set :wpcli_local_backup_dir, "config/backup"
+    set :wpcli_local_backup_dir, "backup"
 
     # La date de maintenant
     # The date of now
     set :wpcli_now, -> {"#{Time.now.strftime '%Y-%m-%d_%H-%M-%S'}"}
-
-    # Le nom du fichier sql de sauvagarde de la base locale
-    # The name of the wildfire sql file from the local database
-    set :wpcli_backup_local_db_file, -> {"backup.local.#{fetch(:wpcli_now)}.sql"}
-
-    # Le nom du fichier sql de sauvagarde de la base distante
-    # The name of the wildfire sql file from the remote database
-    set :wpcli_backup_remote_db_file, -> {"backup.remote.#{fetch(:wpcli_now)}.sql.gz"}
 
   end
 
