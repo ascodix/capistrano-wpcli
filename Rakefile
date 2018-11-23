@@ -2,5 +2,5 @@ require "bundler/gem_tasks"
 
 task :default => :spec
 
-Dir.glob('lib/capistrano/tasks/*.rake').each { |r| load r}
+Dir.glob('lib/windows/capistrano/tasks/*.rake').each { |r| load r}
 

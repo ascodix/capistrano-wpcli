@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "capistrano/wpcli/version"
+require "windows/capistrano/wpcli/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "windows-capistrano-wpcli"
-  spec.version       = Capistrano::Wpcli::VERSION
+  spec.version       = Windows::Capistrano::Wpcli::VERSION
   spec.authors       = ["ascodix"]
   spec.email         = ["stephane-albuisson@gmail.com"]
 

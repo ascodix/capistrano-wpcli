@@ -11,7 +11,7 @@ Sur windows installer 7zip et positionner la variable d'environement C:\Compress
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'windowscapistrano-wpcli'
+gem 'windows-capistrano-wpcli'
 ```
 
 And then execute:
@@ -20,14 +20,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install capistrano-wpcli
+    $ gem install windows-capistrano-wpcli
 
 ## Usage
 
 Add to Capfile :
 
 ```ruby
-require 'capistrano/wpcli'
+require 'windows/capistrano/wpcli'
 ```
 
 ### Available commands
@@ -72,7 +72,7 @@ Everyone interacting in the Capistrano::Wpcli project’s codebases, issue track
 ## Livraison
 
 ```
-gem build capistrano-wpcli.gemspec
+gem build windows-capistrano-wpcli.gemspec
 
-gem push capistrano-wpcli-X.X.XX.gem
+gem push windows-capistrano-wpcli-X.X.XX.gem
 ```
