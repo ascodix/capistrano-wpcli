@@ -69,9 +69,17 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 Everyone interacting in the Capistrano::Wpcli project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/capistrano-wpcli/blob/master/CODE_OF_CONDUCT.md).
 
-## Installation de wp-cli
+## Prérequis
+
+### Installation de wp-cli
 
 Copier les fichiers dans un répertoire et postionner une variable d'environnement sur ce répertoire
+
+### Installation de 7zip
+
+Installer 7zip en installant l'exécutable présent sur le lien psuivant [7zip](https://www.7-zip.org/download.html).
+
+Puis rajouter son exécutable au PATH (par exemple C:\Compression\7-Zip)
 
 ## Livraison
 
